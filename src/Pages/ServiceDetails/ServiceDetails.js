@@ -1,8 +1,49 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const ServiceDetails = () => {
-    const { title, img, price, rating, description } = useLoaderData();
+    const { _id, title, img, price, rating, description } = useLoaderData();
+    const { user } = useContext(AuthContext);
+
+    const handleReview = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const message = form.review.value;
+        const name = user?.displayName || 'unregistered';
+        const email = user?.email || 'email not found';
+        const photoURL = user?.photoURL || 'photo not found';
+
+        const review = {
+            service: _id,
+            serviceName: title,
+            reviewer: name,
+            photoURL,
+            message,
+            email
+        }
+
+        fetch('http://localhost:5000/review', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(review)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.acknowledged) {
+                    form.reset();
+                    alert('review added successfully');
+                    
+                }
+            })
+            .catch(error => {
+                console.error(error)
+            });
+
+    }
+
+
     return (
         <div className='flex flex-row justify-between my-10'>
             <div className='w-5/12 '>
@@ -54,14 +95,15 @@ const ServiceDetails = () => {
                                     <small>this was good click</small>
                                 </td>
                             </tr>
-                            
+
                         </tbody>
 
                     </table>
                 </div>
-                <div className='my-5'>
-                    <input type='text' placeholder='comment here' className='input input-ghost w-full bg-violet-100'/>
-                </div>
+                <form onSubmit={handleReview} className='my-5'>
+                    <input type='text' name='review' placeholder='comment here' className='input input-ghost w-full bg-violet-100' />
+                    <input className='my-5 btn btn-outline bg-violet-500 text-white hover:bg-violet-600' type='submit' value='Add Review' />
+                </form>
 
             </div>
         </div>
