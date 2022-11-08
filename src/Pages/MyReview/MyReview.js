@@ -21,7 +21,7 @@ const MyReview = () => {
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
-                    if(data.deletedCount > 0){
+                    if (data.deletedCount > 0) {
                         alert('deleted successfully');
                         const remaining = review.filter(rev => rev._id !== id);
                         setReview(remaining);
@@ -35,28 +35,38 @@ const MyReview = () => {
 
     return (
         <div className='my-10'>
-            <h3>review: {review.length}</h3>
-            <div className="overflow-x-auto w-full">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th>Person</th>
-                            <th>Review</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            review.map(rev => <MyReviewRow
-                            key={rev._id}
-                            rev={rev}
-                            handleDelete={handleDelete}
-                            ></MyReviewRow>)
-                        }
+            {
+                review.length > 0 ?
+                    <>
+                        <div className="overflow-x-auto w-full">
+                            <table className="table w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Person</th>
+                                        <th>Review</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        review.map(rev => <MyReviewRow
+                                            key={rev._id}
+                                            rev={rev}
+                                            handleDelete={handleDelete}
+                                        ></MyReviewRow>)
+                                    }
 
-                    </tbody>
+                                </tbody>
 
-                </table>
-            </div>
+                            </table>
+                        </div>
+                    </>
+                    :
+                    <>
+                    <p className='text-5xl text-red-600 mt-40'>No reviews were added!</p>
+                    </>
+
+            }
+
         </div>
     );
 };

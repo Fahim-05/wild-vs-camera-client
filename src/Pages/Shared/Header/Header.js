@@ -9,8 +9,8 @@ const Header = () => {
 
     const handleLogout = () => {
         logout()
-            .then(() => { })
-            .catch(error => console.error(error))
+        .then(()=>{})
+        .catch(error=> console.error(error))
     }
 
 
@@ -26,7 +26,16 @@ const Header = () => {
                     <ul className="menu menu-horizontal p-0 text-green-700">
                         <li><Link to='/'>Home</Link></li>
                         <li><Link to='/services'>Services</Link></li>
-                        <li><Link to='/myReview'>My Reviews</Link></li>
+                        {
+                            user?.uid ?
+                                <>
+                                    <li><Link to='/myReview'>My Reviews</Link></li>
+                                    <li><Link to='/addService'>Add Service</Link></li>
+                                </>
+                                :
+                                <>
+                                </>
+                        }
                         <li><Link to='/blogs'>Blogs</Link></li>
 
                     </ul>
