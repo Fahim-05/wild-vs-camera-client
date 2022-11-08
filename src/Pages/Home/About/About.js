@@ -4,7 +4,7 @@ import person from '.././../../assets/about-image/person.jpg';
 
 const About = () => {
     return (
-        <div className="hero min-h-screen">
+        <div className="hero">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className='w-1/2 relative'>
                     <img src={background} className="max-w-sm rounded-lg shadow-2xl" alt=''/>

@@ -4,7 +4,7 @@ import login from '../../assets/login/login.svg';
 
 const Login = () => {
     return (
-        <div className="hero min-h-screen">
+        <div className="hero">
             <div className="hero-content flex-row-reverse">
                 <div className="text-center lg:text-left">
                     <img src={login} alt='' />
