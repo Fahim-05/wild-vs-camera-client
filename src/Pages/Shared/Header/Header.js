@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -6,12 +7,15 @@ const Header = () => {
             <div className="navbar bg-base-100">
                 <div className="navbar-start">
                     
-                    <a className="btn btn-ghost normal-case text-xl">Wild vs. Photographer</a>
+                    <a className="btn btn-ghost normal-case text-2xl text-violet-600 font-bold">Wild <span className='mx-2 text-violet-400'>vs.</span> Camera</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0">
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 3</a></li>
+                        <li><Link>Home</Link></li>
+                        <li><Link>Services</Link></li>
+                        <li><Link>My Reviews</Link></li>
+                        <li><Link>Blogs</Link></li>
+                        
                     </ul>
                 </div>
                 <div className="navbar-end">
