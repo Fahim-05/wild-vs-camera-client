@@ -19,8 +19,9 @@ const Header = () => {
                         
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <button className='btn'></button>
+                <div className="navbar-end gap-1">
+                    <Link to='/logIn'><button className='btn btn-outline bg-green-700 text-white hover:bg-green-900 border-none'>Login</button></Link>
+                    <Link to='/signUp'><button className='btn btn-outline bg-violet-700 text-white hover:bg-violet-900 border-none'>Sign Up</button></Link>
                 </div>
             </div>
         </div>
