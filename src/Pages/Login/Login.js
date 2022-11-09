@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import login from '../../assets/login/login.svg';
+import loginImg from '../../assets/login/login.svg';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
 
-    const {login} = useContext(AuthContext);
+    const {login, loading} = useContext(AuthContext);
 
     const handleLogin = event => {
         event.preventDefault();
@@ -18,8 +18,9 @@ const Login = () => {
             const user = result.user;
         })
         .catch(error => console.error(error));
-
-
+    }
+    if (loading) {
+        return <progress className="progress w-full"></progress>
     }
 
 
@@ -28,7 +29,7 @@ const Login = () => {
         <div className="hero">
             <div className="hero-content flex-row-reverse">
                 <div className="text-center lg:text-left">
-                    <img src={login} alt='' />
+                    <img src={loginImg} alt='img' />
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <form onSubmit={handleLogin} className="card-body">

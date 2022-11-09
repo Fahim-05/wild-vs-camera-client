@@ -5,7 +5,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const SignUp = () => {
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser, loading } = useContext(AuthContext);
 
     const handleSignUp = event => {
         event.preventDefault();
@@ -19,8 +19,9 @@ const SignUp = () => {
             const user = result.user;
         })
         .catch(error => console.error(error));
-
-
+    }
+    if (loading) {
+        return <progress className="progress w-full"></progress>
     }
 
     return (

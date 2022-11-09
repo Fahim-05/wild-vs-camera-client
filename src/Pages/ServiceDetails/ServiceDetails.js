@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const ServiceDetails = () => {
     const { _id, title, img, price, rating, description } = useLoaderData();
     const { user } = useContext(AuthContext);
+
 
     const handleReview = (event) => {
         event.preventDefault();
@@ -34,7 +35,7 @@ const ServiceDetails = () => {
                 if (data.acknowledged) {
                     form.reset();
                     alert('review added successfully');
-                    
+
                 }
             })
             .catch(error => {
@@ -45,10 +46,10 @@ const ServiceDetails = () => {
 
 
     return (
-        <div className='flex flex-row justify-between my-10'>
-            <div className='w-5/12 '>
+        <div >
+            <div className='w-9/12 mx-auto my-10'>
                 <div className="card card-compact bg-base-100 shadow-xl">
-                    <figure className='h-[300px]'><img src={img} alt="Shoes" /></figure>
+                    <figure className='h-[400px]'><img src={img} alt="Shoes" /></figure>
                     <div className="card-body mt-5">
                         <div className='flex items-center justify-between'>
                             <h2 className="card-title text-2xl text-violet-600 font-bold">{title}</h2>
@@ -66,7 +67,8 @@ const ServiceDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className='w-6/12'>
+            <div className='w-9/12 mx-auto mt-20'>
+                <p className='my-10 text-2xl text-violet-600 font-semibold underline'>Add Review</p>
 
                 <div className="overflow-x-auto w-full">
                     <table className="table w-full">
@@ -81,13 +83,13 @@ const ServiceDetails = () => {
                                 <td>
                                     <div className="flex items-center space-x-3">
                                         <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
-                                                <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+                                            <div className="rounded-full w-12 h-12">
+                                                <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
                                             </div>
                                         </div>
                                         <div>
-                                            <div className="font-bold">Hart Hagerty</div>
-                                            <div className="text-sm opacity-50">United States</div>
+                                            <div className="font-bold">{user?.displayName}</div>
+                                            <div className="text-sm opacity-50">{user?.email}</div>
                                         </div>
                                     </div>
                                 </td>
@@ -100,10 +102,19 @@ const ServiceDetails = () => {
 
                     </table>
                 </div>
-                <form onSubmit={handleReview} className='my-5'>
-                    <input type='text' name='review' placeholder='comment here' className='input input-ghost w-full bg-violet-100' />
-                    <input className='my-5 btn btn-outline bg-violet-500 text-white hover:bg-violet-600' type='submit' value='Add Review' />
-                </form>
+                {
+                    user?.uid ?
+                        <>
+                            <form onSubmit={handleReview} className='my-5'>
+                                <input type='text' name='review' placeholder='comment here' className='input input-ghost w-full bg-violet-100' />
+                                <input className='my-5 btn btn-outline bg-violet-500 text-white hover:bg-violet-600' type='submit' value='Add Review' />
+                            </form></>
+                        :
+                        <>
+                        <p className='my-10 font-semibold text-xl text-orange-600'>Please login to add review <Link to='/login' className='text-blue-600 underline'>Login</Link></p>
+                        </>
+                }
+
 
             </div>
         </div>
