@@ -45,7 +45,7 @@ const Header = () => {
                         user?.uid ?
                             <>
                                 <div className="avatar online">
-                                    <div className="w-112 rounded-full">
+                                    <div className="w-10 border-4 border-green-500 rounded-full">
                                         <img src={user?.photoURL} alt='img'/>
                                     </div>
                                 </div>

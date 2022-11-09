@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import MyReviewRow from './MyReviewRow';
 import toast from 'react-hot-toast';
-import useTitle from '../../hooks/useTitle';
+import useTitle from '../../hooks/useTitle'; 
 
 const MyReview = () => {
     useTitle('My Reviews');

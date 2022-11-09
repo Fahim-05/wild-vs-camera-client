@@ -2,11 +2,22 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useTitle from '../../hooks/useTitle';
+import ServiceReview from './ServiceReview';
+import toast from 'react-hot-toast';
 
 const ServiceDetails = () => {
     useTitle('Service Details');
     const { _id, title, img, price, rating, description } = useLoaderData();
     const { user } = useContext(AuthContext);
+    const [review, setReview] = useState([]);
+
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/specificServiceReview?service=${_id}`)
+            .then(res => res.json())
+            .then(data => setReview(data))
+    }, [_id])
+
 
 
     const handleReview = (event) => {
@@ -36,7 +47,7 @@ const ServiceDetails = () => {
                 console.log(data)
                 if (data.acknowledged) {
                     form.reset();
-                    alert('review added successfully');
+                    toast.success('Review added successfully, Reload to see the comment');
 
                 }
             })
@@ -45,6 +56,14 @@ const ServiceDetails = () => {
             });
 
     }
+
+
+
+
+
+
+
+
 
 
     return (
@@ -69,6 +88,11 @@ const ServiceDetails = () => {
                     </div>
                 </div>
             </div>
+            <diV>
+                {
+                    review.map(rev=> <p key={rev._id} rev={rev}></p>)
+                }
+            </diV>
             <div className='w-9/12 mx-auto mt-20'>
                 <p className='my-10 text-2xl text-violet-600 font-semibold underline'>Add Review</p>
 
@@ -81,24 +105,12 @@ const ServiceDetails = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div className="flex items-center space-x-3">
-                                        <div className="avatar">
-                                            <div className="rounded-full w-12 h-12">
-                                                <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div className="font-bold">{user?.displayName}</div>
-                                            <div className="text-sm opacity-50">{user?.email}</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <small>this was good click</small>
-                                </td>
-                            </tr>
+                            {
+                                review.map(rev => <ServiceReview
+                                    key={rev._id}
+                                    rev={rev}
+                                ></ServiceReview>)
+                            }
 
                         </tbody>
 
