@@ -57,7 +57,7 @@ const MyReviewRow = ({ rev, handleDelete }) => {
 
                 </td>
                 <div className='mt-5 ml-16'>
-                    <button className='btn btn-outline'>Update</button>
+                    <button className='btn btn-outline'>Edit Review</button>
                 </div>
 
             </tr>

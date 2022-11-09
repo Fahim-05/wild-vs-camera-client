@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import signup from '../../assets/signup/signup.svg';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 const SignUp = () => {
+    useTitle('SignUp')
 
     const { createUser, loading } = useContext(AuthContext);
 

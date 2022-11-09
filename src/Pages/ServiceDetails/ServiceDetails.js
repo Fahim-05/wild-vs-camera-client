@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../hooks/useTitle';
 
 const ServiceDetails = () => {
+    useTitle('Service Details');
     const { _id, title, img, price, rating, description } = useLoaderData();
     const { user } = useContext(AuthContext);
 
