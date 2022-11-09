@@ -6,12 +6,12 @@ import 'react-photo-view/dist/react-photo-view.css';
 const ServiceCard = ({ service }) => {
     const { _id, img, price, title, description } = service;
     return (
-        <div className="card card-compact bg-base-100 shadow-xl">
+        <div className="card card-compact bg-base-100 shadow-xl transform duration-500 hover:scale-110">
             <figure>
 
                 <PhotoProvider>
                     <PhotoView src={img}>
-                        <img src={img} alt="" />
+                        <img className='transform transition duration-500 hover:scale-125' src={img} alt="" />
                     </PhotoView>
                 </PhotoProvider>
 

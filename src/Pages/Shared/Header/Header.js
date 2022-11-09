@@ -19,24 +19,24 @@ const Header = () => {
         <div>
             <div className="navbar bg-base-200">
                 <div className="navbar-start">
-                    <img className='w-12' src={logo} alt='' />
-                    <Link to='/' ><a className="btn btn-ghost normal-case text-2xl text-violet-600 font-bold">Wild <span className='mx-2 text-violet-400'>vs.</span> Camera</a></Link>
+                    <img className='w-10' src={logo} alt='' />
+                    <Link to='/' ><button className="btn btn-ghost normal-case text-xl text-violet-600 font-bold">Wild <span className='mx-2 text-violet-400'>vs.</span> Camera</button></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0 text-green-700">
-                        <li><Link to='/'>Home</Link></li>
-                        <li><Link to='/services'>Services</Link></li>
+                        <li><Link to='/' className='transform duration-500 hover:scale-110'>Home</Link></li>
+                        <li><Link to='/services' className='transform duration-500 hover:scale-110'>Services</Link></li>
                         {
                             user?.uid ?
                                 <>
-                                    <li><Link to='/myReview'>My Reviews</Link></li>
-                                    <li><Link to='/addService'>Add Service</Link></li>
+                                    <li><Link to='/myReview' className='transform duration-500 hover:scale-110'>My Reviews</Link></li>
+                                    <li><Link to='/addService' className='transform duration-500 hover:scale-110'>Add Service</Link></li>
                                 </>
                                 :
                                 <>
                                 </>
                         }
-                        <li><Link to='/blogs'>Blogs</Link></li>
+                        <li><Link to='/blogs' className='transform duration-500 hover:scale-110'>Blogs</Link></li>
 
                     </ul>
                 </div>
@@ -49,7 +49,7 @@ const Header = () => {
                                         <img src={user?.photoURL} alt='img'/>
                                     </div>
                                 </div>
-                                <p>{user?.email}</p>
+                                <p className='text-xs'>{user?.email}</p>
                                 <Link to='' onClick={handleLogout}><button className='btn btn-outline w-16 text-red-600 border-red-500 hover:bg-red-700 text-xs'>LogOut</button></Link>
                             </>
                             :

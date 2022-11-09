@@ -5,7 +5,7 @@ import img3 from '../../../assets/memory/3.svg';
 
 const Memory = () => {
     return (
-        <div className="hero  bg-violet-200 my-10">
+        <div className="hero w-10/12 mx-auto rounded-xl bg-violet-200 my-28">
             <div className="hero-content flex-col lg:flex-row w-3/4">
                 <div className=''>
                     <div className="h-96 carousel carousel-vertical rounded-box">

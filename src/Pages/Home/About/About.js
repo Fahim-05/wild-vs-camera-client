@@ -4,11 +4,11 @@ import person from '.././../../assets/about-image/person.jpg';
 
 const About = () => {
     return (
-        <div className='my-10'>
+        <div className='my-20'>
             <div className="hero">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className='w-1/2 relative'>
-                        <img src={background} className="max-w-sm rounded-lg shadow-2xl border-2  border-violet-500" alt='' />
+                        <img  src={background} className="max-w-sm rounded-lg shadow-2xl border-2  border-violet-500 " alt='' />
                         <img src={person} className="absolute w-20 h-20 bottom-4 right-36 rounded-full border-4 border-orange-600" alt='' />
                     </div>
                     <div className='w-1/2'>
