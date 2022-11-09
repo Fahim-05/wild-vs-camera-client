@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import MyReviewRow from './MyReviewRow';
+import toast from 'react-hot-toast';
 
 const MyReview = () => {
     const { user } = useContext(AuthContext);
@@ -22,7 +23,7 @@ const MyReview = () => {
                 .then(data => {
                     console.log(data);
                     if (data.deletedCount > 0) {
-                        alert('deleted successfully');
+                        toast.success('Successfully Deleted!')
                         const remaining = review.filter(rev => rev._id !== id);
                         setReview(remaining);
                     }
@@ -38,12 +39,17 @@ const MyReview = () => {
             {
                 review.length > 0 ?
                     <>
-                        <div className="overflow-x-auto w-full">
+                        <div className="overflow-x-auto w-11/12 mx-auto">
                             <table className="table w-full">
                                 <thead>
                                     <tr>
-                                        <th>Person</th>
-                                        <th>Review</th>
+                                        <div className='grid grid-cols-5'>
+                                            <th className=' bg-red-300'>Delete</th>
+                                            <th className=' bg-blue-300'>Service</th>
+                                            <th className=' bg-green-300'>Review</th>
+                                            <th className=' bg-violet-300'>Person</th>
+                                            <th className=' bg-orange-300'>Update</th>
+                                        </div>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,10 +68,12 @@ const MyReview = () => {
                     </>
                     :
                     <>
-                    <p className='text-5xl text-red-600 mt-40'>No reviews were added!</p>
+                        <p className='text-5xl text-red-600 mt-40'>No reviews were added!</p>
                     </>
 
             }
+
+
 
         </div>
     );

@@ -10,20 +10,20 @@ const MyReviewRow = ({ rev, handleDelete }) => {
             .then(data => setReviewedService(data))
     }, [service])
 
-    
+
 
     return (
-        <div>
-            <tr>
+        <div className=''>
+            <tr className='grid grid-cols-5'>
                 <th>
                     <label>
                         <button onClick={() => handleDelete(_id)} className='btn btn-ghost'>X</button>
                     </label>
                 </th>
                 <td>
-                    <div className="flex items-center space-x-3">
+                    <div className="flex space-x-3">
                         <div className="avatar">
-                            <div className="rounded w-12 h-12">
+                            <div className="rounded w-10 h-10">
                                 {
                                     reviewedService?.img &&
                                     <img src={reviewedService.img} alt="Avatar Tailwind CSS Component" />
@@ -31,15 +31,40 @@ const MyReviewRow = ({ rev, handleDelete }) => {
                             </div>
                         </div>
                         <div>
-                            <div className="font-bold">{reviewer}</div>
+                            <div className="font-semibold text-sm">{serviceName}</div>
+                        </div>
+                    </div>
+
+                </td>
+                <td className='border-green-300 border my-2'>
+                    <small className=''>{message}</small>
+                </td>
+                <td>
+                    <div className="flex space-x-3">
+                        <div className="avatar">
+                            <div className="rounded-full w-10 h-10">
+                                {
+                                    reviewedService?.img &&
+                                    <img src={reviewedService.img} alt="Avatar Tailwind CSS Component" />
+                                }
+                            </div>
+                        </div>
+                        <div>
+                            <div className="font-semibold text-sm">{reviewer}</div>
                             <div className="text-sm opacity-50">{email}</div>
                         </div>
                     </div>
+
                 </td>
-                <td>
-                    <small className='text-end'>{message}</small>
-                </td>
+                <div className='mt-5 ml-16'>
+                    <button className='btn btn-outline'>Update</button>
+                </div>
+
             </tr>
+
+
+
+
         </div>
     );
 };
