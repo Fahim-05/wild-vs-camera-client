@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import useTitle from '../../hooks/useTitle';
 
 const MyReview = () => {
-    useTitle('My Reviews')
+    useTitle('My Reviews');
     const { user } = useContext(AuthContext);
     const [review, setReview] = useState([]);
 
@@ -34,6 +34,34 @@ const MyReview = () => {
     }
 
 
+    const handleReviewUpdate = (id, message) => {
+        console.log(id);
+        console.log(message);
+
+
+        fetch(`http://localhost:5000/review/${id}`, {
+            method: 'PATCH',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({message: message})
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    const remaining = review.filter(rev => rev._id !== id)
+                    const updating = review.find(rev => rev._id === id)
+                    updating.message = message;
+
+                    const newReview = [updating, ...remaining];
+                    console.log(newReview, 'ya');
+                    setReview(newReview);
+                    toast.success('Review updated Successfully');
+                }
+            })
+    }
+
+    
+
+
 
 
     return (
@@ -60,6 +88,7 @@ const MyReview = () => {
                                             key={rev._id}
                                             rev={rev}
                                             handleDelete={handleDelete}
+                                            handleReviewUpdate={handleReviewUpdate}
                                         ></MyReviewRow>)
                                     }
 

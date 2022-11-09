@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import signup from '../../assets/signup/signup.svg';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useTitle from '../../hooks/useTitle';
@@ -7,24 +7,47 @@ import useTitle from '../../hooks/useTitle';
 const SignUp = () => {
     useTitle('SignUp')
 
-    const { createUser, loading } = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const { createUser, loading, updateUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSignUp = event => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
+        const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
 
         createUser(email, password)
-        .then(result=> {
-            const user = result.user;
-        })
-        .catch(error => console.error(error));
+            .then(result => {
+                const user = result.user;
+                setError('');
+                handleUser(name, photoURL);
+                form.reset();
+                navigate(from, { replace: true });
+            })
+            .catch(error => {
+                setError(error.message);
+                console.error(error)
+            });
     }
     if (loading) {
         return <progress className="progress w-full"></progress>
     }
+
+    const handleUser = (name, photURL) => {
+        const profile = { displayName: name, photURL: photURL };
+        updateUser(profile)
+            .then((result) => {
+                const user = result.user;
+            })
+            .catch(error => console.error(error));
+    }
+
+
 
     return (
         <div className="hero">
@@ -40,6 +63,12 @@ const SignUp = () => {
                                 <span className="label-text">Name</span>
                             </label>
                             <input type="text" name='name' placeholder="your name" className="input input-bordered" />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Photo URL</span>
+                            </label>
+                            <input type="text" name='photoURL' placeholder="photo URL" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -59,7 +88,11 @@ const SignUp = () => {
                         <div className="form-control mt-6">
                             <input className='btn btn-outline text-violet-600 hover:bg-violet-600' type='submit' value='Signup' />
                         </div>
+
                     </form>
+                    {
+                        error
+                    }
                 </div>
             </div>
         </div>

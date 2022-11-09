@@ -9,8 +9,8 @@ const Header = () => {
 
     const handleLogout = () => {
         logout()
-        .then(()=>{})
-        .catch(error=> console.error(error))
+            .then(() => { })
+            .catch(error => console.error(error))
     }
 
 
@@ -44,8 +44,13 @@ const Header = () => {
                     {
                         user?.uid ?
                             <>
+                                <div className="avatar online">
+                                    <div className="w-112 rounded-full">
+                                        <img src={user?.photoURL} alt='img'/>
+                                    </div>
+                                </div>
                                 <p>{user?.email}</p>
-                                <Link to='' onClick={handleLogout}><button className='btn btn-outline bg-red-600 text-white hover:bg-red-700 border-none'>Log Out</button></Link>
+                                <Link to='' onClick={handleLogout}><button className='btn btn-outline w-16 text-red-600 border-red-500 hover:bg-red-700 text-xs'>LogOut</button></Link>
                             </>
                             :
                             <>

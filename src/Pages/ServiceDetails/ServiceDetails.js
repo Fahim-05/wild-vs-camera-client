@@ -110,10 +110,11 @@ const ServiceDetails = () => {
                             <form onSubmit={handleReview} className='my-5'>
                                 <input type='text' name='review' placeholder='comment here' className='input input-ghost w-full bg-violet-100' />
                                 <input className='my-5 btn btn-outline bg-violet-500 text-white hover:bg-violet-600' type='submit' value='Add Review' />
-                            </form></>
+                            </form>
+                        </>
                         :
                         <>
-                        <p className='my-10 font-semibold text-xl text-orange-600'>Please login to add review <Link to='/login' className='text-blue-600 underline'>Login</Link></p>
+                            <p className='my-10 font-semibold text-xl text-orange-600'>Please login to add review <Link to='/login' className='text-blue-600 underline'>Login</Link></p>
                         </>
                 }
 
@@ -123,4 +124,4 @@ const ServiceDetails = () => {
     );
 };
 
-export default ServiceDetails; <h1>Service details</h1>
+export default ServiceDetails;

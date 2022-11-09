@@ -1,13 +1,19 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/login/login.svg';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useTitle from '../../hooks/useTitle';
+import { FaGoogle } from "react-icons/fa";
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
     useTitle('Login')
 
-    const {login, loading} = useContext(AuthContext);
+    const {login, loading, providerLogin} = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location =useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleLogin = event => {
         event.preventDefault();
@@ -18,12 +24,26 @@ const Login = () => {
         login(email, password)
         .then(result => {
             const user = result.user;
+            navigate(from, {replace: true});
         })
         .catch(error => console.error(error));
     }
     if (loading) {
         return <progress className="progress w-full"></progress>
     }
+
+
+    const googleProvider = new GoogleAuthProvider()
+
+    const handleGoogleLogin = () => {
+        providerLogin(googleProvider)
+        .then(result => {
+            const user = result.user;
+            navigate(from, {replace: true});
+        })
+        .catch(error => console.error(error));
+    }
+
 
 
 
@@ -51,9 +71,13 @@ const Login = () => {
                                <small>New to this site? please <Link to='/signup' className='text-violet-700 underline'>Sign Up</Link></small>
                             </label>
                         </div>
+                        <div onClick={handleGoogleLogin} className="form-control btn btn-outline text-blue-600 hover:bg-blue-600">
+                            <button  className='text-2xl'><FaGoogle></FaGoogle></button>
+                        </div>
                         <div className="form-control mt-6">
                             <input className='btn btn-outline text-emerald-600 hover:bg-emerald-600' type='submit' value='LogIn'/>
                         </div>
+                        
                     </form>
                 </div>
             </div>
