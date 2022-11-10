@@ -5,6 +5,7 @@ import Blogs from "../../Pages/Blogs/Blogs";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import MyReview from "../../Pages/MyReview/MyReview";
+import PageNotFound from "../../Pages/PageNotFound/PageNotFound";
 import ServiceDetails from "../../Pages/ServiceDetails/ServiceDetails";
 import Services from "../../Pages/Services/Services";
 import SignUp from "../../Pages/SignUp/SignUp";
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
         {
           path: '/addService',
           element: <PrivateRoute><AddService></AddService></PrivateRoute>
+        },
+        {
+          path: '*',
+          element: <PageNotFound></PageNotFound>
         }
       ]
     }
