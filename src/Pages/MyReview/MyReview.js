@@ -10,22 +10,13 @@ const MyReview = () => {
     const [review, setReview] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/review?email=${user?.email}`,{
-            headers: {
-                authorization: `Bearer ${localStorage.getItem('wild-token')}`
-            }
-        })
-            .then(res => {
-                if(res.status === 401 || res.status === 403){
-                    return logout()
-                }
-                return res.json()
-            })
-            .then(data => {
+        fetch(`http://localhost:5000/review?email=${user?.email}`)
+            .then(res => res.json())
+            .then(data => setReview(data))
+    }, [user?.email])
 
-                setReview(data)
-            })
-    }, [user?.email, logout])
+
+
 
     const handleDelete = (id) => {
         const proceed = window.confirm('are you sure? ');
@@ -47,9 +38,6 @@ const MyReview = () => {
 
 
     const handleReviewUpdate = (id, message) => {
-        console.log(id);
-        console.log(message);
-
 
         fetch(`http://localhost:5000/review/${id}`, {
             method: 'PATCH',
@@ -113,10 +101,7 @@ const MyReview = () => {
                     <>
                         <p className='text-5xl text-red-600 mt-40'>No reviews were added!</p>
                     </>
-
             }
-
-
 
         </div>
     );

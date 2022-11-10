@@ -5,8 +5,10 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const MyReviewRow = ({ rev, handleDelete, handleReviewUpdate }) => {
     const { _id, serviceName, service, reviewer, photoURL, message, email } = rev;
-    const {user} = useContext(AuthContext);
-    const [reviewedService, setReviewedService] = useState({});
+    const { user } = useContext(AuthContext);
+    const [reviewedService, setReviewedService] = useState([]);
+
+    
 
     useEffect(() => {
         fetch(`http://localhost:5000/services/${service}`)
@@ -16,15 +18,12 @@ const MyReviewRow = ({ rev, handleDelete, handleReviewUpdate }) => {
 
 
 
-
-
-
     return (
         <div className=''>
             <tr className='grid grid-cols-5'>
                 <th>
                     <label>
-                        <button onClick={() => handleDelete(_id)} className='btn btn-ghost'>X</button>
+                        <button onClick={() => handleDelete(_id)} className='btn btn-outline text-red-600 text-xl hover:text-red-500'>Delete</button>
                     </label>
                 </th>
                 <td>
@@ -43,7 +42,7 @@ const MyReviewRow = ({ rev, handleDelete, handleReviewUpdate }) => {
                     </div>
 
                 </td>
-                <td className='border-green-300 border my-2'>
+                <td className='border-green-300 border-2 rounded-xl my-2'>
                     <small className=''>{message}</small>
                 </td>
                 <td>
@@ -64,13 +63,27 @@ const MyReviewRow = ({ rev, handleDelete, handleReviewUpdate }) => {
 
                 </td>
 
-                <div className='w-1/2 mx-auto'>
-                    <button className='btn btn-outline'>Update</button>
-                </div>
+                <td>
+                    {/* The button to open modal */}
+                    <label  htmlFor="my-modal-6" className="btn">Update Review</label>
+
+                    {/* Put this part before </body> tag */}
+                    <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+                    <div className="modal modal-bottom sm:modal-middle">
+                        <div className="modal-box">
+                            <form  className='my-5 flex flex-col'>
+                                <input type='text' name='review' placeholder='comment here' className='input input-ghost w-full bg-violet-100' />
+                                
+                            </form>
+                                <button className='my-5 btn btn-outline bg-violet-500 text-white hover:bg-violet-600' type='submit'>Add Review</button>
+                            <div className="modal-action">
+                                <label htmlFor="my-modal-6" className="btn">Done</label>
+                            </div>
+                        </div>
+                    </div>
+                </td>
 
             </tr>
-
-
 
 
         </div >

@@ -20,7 +20,7 @@ const ServiceDetails = () => {
 
 
 
-    const handleReview = (event) => {
+    const handleReview = (event) => { 
         event.preventDefault();
         const form = event.target;
         const message = form.review.value;
@@ -47,7 +47,7 @@ const ServiceDetails = () => {
                 console.log(data)
                 if (data.acknowledged) {
                     form.reset();
-                    toast.success('Review added successfully, Reload to see the comment');
+                    toast.success('Review added successfully');
 
                 }
             })
@@ -56,10 +56,6 @@ const ServiceDetails = () => {
             });
 
     }
-
-
-
-
 
 
 
