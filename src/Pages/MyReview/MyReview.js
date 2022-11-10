@@ -10,7 +10,7 @@ const MyReview = () => {
     const [review, setReview] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/review?email=${user?.email}`)
+        fetch(`https://wild-photographer-server-pearl.vercel.app/review?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setReview(data))
     }, [user?.email])
@@ -21,7 +21,7 @@ const MyReview = () => {
     const handleDelete = (id) => {
         const proceed = window.confirm('are you sure? ');
         if (proceed) {
-            fetch(`http://localhost:5000/review/${id}`, {
+            fetch(`https://wild-photographer-server-pearl.vercel.app/review/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -39,7 +39,7 @@ const MyReview = () => {
 
     const handleReviewUpdate = (id, message) => {
 
-        fetch(`http://localhost:5000/review/${id}`, {
+        fetch(`https://wild-photographer-server-pearl.vercel.app/review/${id}`, {
             method: 'PATCH',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({message: message})

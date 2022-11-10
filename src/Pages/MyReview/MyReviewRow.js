@@ -11,7 +11,7 @@ const MyReviewRow = ({ rev, handleDelete, handleReviewUpdate }) => {
     
 
     useEffect(() => {
-        fetch(`http://localhost:5000/services/${service}`)
+        fetch(`https://wild-photographer-server-pearl.vercel.app/services/${service}`)
             .then(res => res.json())
             .then(data => setReviewedService(data))
     }, [service])

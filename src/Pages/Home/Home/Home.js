@@ -19,7 +19,7 @@ const Home = () => {
     const { loading } = useContext(AuthContext);
     const [services, setServices] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/limitedService')
+        fetch('https://wild-photographer-server-pearl.vercel.app/limitedService')
             .then(res => res.json())
             .then(data => setServices(data))
     }, [])
