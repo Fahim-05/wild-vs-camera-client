@@ -20,7 +20,7 @@ Live Website Link:
     * Have some Hover effect on mouse over,
     * User can delete any review from his/her review
 
-3.Frameworks:
+3. Frameworks:
 
     * I have used 'Tailwind' & 'DaisyUI' Css Framework in this website,
     * used 'react-photo-viewer', 'react-hot-toast' package
